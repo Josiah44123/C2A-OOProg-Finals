@@ -82,3 +82,11 @@ Prevent data loss through error-handled file writing and reading.
 Prevent invalid inputs such as negative amounts or non-existent accounts.  
 Handle corrupted files gracefully by rebuilding defaults.  
 Provide clear user prompts and input re-entry options.
+
+
+
+___________________________________________________________
+
+                PART 2 : UML CLASS DIAGRAM
+___________________________________________________________
+![https://www.figma.com/board/4xTBRMSzdMeRowc6OUie8O/Banking_Class_Diagram_FINALS?node-id=8452-198&t=5Ve6MXncGXJavryB-0](image.png)
