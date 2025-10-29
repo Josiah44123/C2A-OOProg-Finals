@@ -34,7 +34,7 @@ class Transaction {
     
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return "[" + transactionId + "] " + type + " - $" + amount + 
+        return "[" + transactionId + "] " + type + " - ₱" + amount + 
                " | " + description + " | " + timestamp.format(formatter);
     }
 }
