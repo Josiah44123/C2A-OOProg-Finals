@@ -4,7 +4,7 @@ import java.io.*;
 import java.time.*;
 import java.time.format.*;
 
-public class Main {
+public class BankingSystemApp {
     public static void main(String[] args) {
         BankSystem system = new BankSystem();
         system.start();
