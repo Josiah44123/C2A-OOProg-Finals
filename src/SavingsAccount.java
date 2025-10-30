@@ -1,3 +1,5 @@
+
+//finalized na to
 public class SavingsAccount extends Account {
     private static final double INTEREST_RATE = 0.03; // 3% interest kasi gusto ko bakit ba?
     private static final double SERVICE_FEE = 5.0;
