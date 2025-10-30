@@ -1,13 +1,23 @@
-// Main.java
-import java.util.*;
-import java.io.*;
-import java.time.*;
-import java.time.format.*;
+
+
+import java.util.Scanner;
 
 public class BankingSystemApp {
+    private static Bank bank;
+    private static Scanner scanner;
+    private static Client currentClient;
+    
     public static void main(String[] args) {
-        BankSystem system = new BankSystem();
-        system.start();
+        scanner = new Scanner(System.in);
+        
+   
+       
+        System.out.println("╔════════════════════════════════════════╗");
+        System.out.println("║   WELCOME TO ADVANCED BANKING SYSTEM   ║");
+        System.out.println("╚════════════════════════════════════════╝");
+        
+        
+        scanner.close();
     }
 }
 
