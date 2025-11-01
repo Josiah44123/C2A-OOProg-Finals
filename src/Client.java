@@ -1,57 +1,75 @@
 //Client part of the Banking System
 //di pato finalized
 // Client class
-class Client {
+//updated (hopefully final) client code 1/11/2025
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Client implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private static int clientClient = 1000;
+    
     private String clientId;
     private String name;
-    private String password;
-    private int pin;
-    private boolean locked;
+    private String pin;
     private int failedLoginAttempts;
-    private int clientCounter;
-
-    public Client(String name, String password, int pin) {
-        this.clientId = "CLI-" + System.currentTimeMillis();
+    private boolean isLocked;
+    private List<String> accountIds;
+    
+    public Client(String name, String pin) {
+        this.clientId = generateClientId();
         this.name = name;
-        this.password = password;
         this.pin = pin;
-        this.locked = false;
         this.failedLoginAttempts = 0;
+        this.isLocked = false;
+        this.accountIds = new ArrayList<>();
     }
-
-    public String getClientId() {
-        return clientId;
+    
+    private static synchronized String generateClientId() {
+        return "CLI-" + (clientClient++);
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean checkPassword(String password, int pin) {
-        if (locked) {
-            System.out.println("Account is locked due to too many failed attempts!");
+    
+    public boolean authenticate(String inputPin) {
+        if (isLocked) {
             return false;
         }
-
-        if (this.password.equals(password) && this.pin == pin) {
+        
+        if (pin.equals(inputPin)) {
             failedLoginAttempts = 0;
             return true;
         } else {
             failedLoginAttempts++;
             if (failedLoginAttempts >= 3) {
-                locked = true;
-                System.out.println("Account locked due to 3 failed login attempts!");
+                isLocked = true;
             }
             return false;
         }
     }
-
-    public boolean isLocked() {
-        return locked;
-    }
-
+    
     public void unlockAccount() {
-        locked = false;
+        isLocked = false;
         failedLoginAttempts = 0;
+    }
+    
+    public void changePin(String newPin) {
+        this.pin = newPin;
+    }
+    
+    public void addAccount(String accountId) {
+        accountIds.add(accountId);
+    }
+    
+    // Getters
+    public String getClientId() { return clientId; }
+    public String getName() { return name; }
+    public boolean isLocked() { return isLocked; }
+    public int getFailedLoginAttempts() { return failedLoginAttempts; }
+    public List<String> getAccountIds() { return new ArrayList<>(accountIds); }
+    
+    @Override
+    public String toString() {
+        return String.format("%s - %s (%d accounts)", clientId, name, accountIds.size());
     }
 }
