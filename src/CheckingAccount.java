@@ -9,6 +9,23 @@ public class CheckingAccount extends Account{
     }
 
     @Override
+    public boolean withdraw(double amount){
+        if (amount <= 0){
+            return false;   
+        }
+        if (getBalance() - amount >= -OVERDRAFT_LIMIT){
+            setBalance(getBalance() - amount);
+            addTransaction("WITHDRAWAL", amount, "Withdrawal successful");
+
+            if (getBalance() < 0){
+                setBalance(getBalance() - OVERDRAFT_FEE);
+                addTransaction("OVERDRAFT_FEE", amount, "Overdraft fee applied.");
+            }
+            return true;
+        }
+    }
+
+    @Override
     public void applyInterest() {
         double interest = getBalance() * INTEREST_RATE / 12; // Monthly interest
         setBalance(getBalance() + interest);
