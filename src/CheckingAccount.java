@@ -1,3 +1,4 @@
+// kay yanna toh
 public class CheckingAccount extends Account{
     private static final double INTEREST_RATE = 0.01;
     private static final double SERVICE_FEE = 10.0;
