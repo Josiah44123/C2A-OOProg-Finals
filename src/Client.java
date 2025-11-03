@@ -1,5 +1,5 @@
 //Client part of the Banking System
-//di pato finalized
+
 // Client class
 //updated (hopefully final) client code 1/11/2025
 
