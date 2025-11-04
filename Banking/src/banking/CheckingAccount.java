@@ -1,3 +1,4 @@
+package banking;
 // kay yanna toh
 public class CheckingAccount extends Account{
     private static final double INTEREST_RATE = 0.01;
