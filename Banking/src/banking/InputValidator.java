@@ -28,11 +28,8 @@ public class InputValidator {
         return pin != null && PIN_PATTERN.matcher(pin).matches();
     }
     
-    /**
-     * Validates monetary amount
-     * - Non-negative number
-     * - Up to 2 decimal places
-     */
+    // Validates monetary amount, Non-negative number, Up to 2 decimal places
+    
     public static boolean isValidAmount(String amount) {
         if (amount == null || !AMOUNT_PATTERN.matcher(amount).matches()) {
             return false;
