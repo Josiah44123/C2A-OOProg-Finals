@@ -2,65 +2,71 @@ package banking;
 
 import java.util.regex.Pattern;
 
-/**
- * Input validation utility using regex
- * Validates user inputs for security and correctness
- */
+// Input validation utility using da regex
 public class InputValidator {
+    
+    // Regex patterns
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\s'-]+$");
+    private static final Pattern PIN_PATTERN = Pattern.compile("^\\d{4}$");
+    private static final Pattern AMOUNT_PATTERN = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
+    private static final Pattern ACCOUNT_ID_PATTERN = Pattern.compile("^[A-Z0-9]{8,}$");
+    private static final Pattern CLIENT_ID_PATTERN = Pattern.compile("^CLT\\d{4}$");
+    
+    // Validates client name - At least 1 character and Only letters, spaces, hyphens, apostrophes
 
-    // Regex patt erns
-    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\s'-]+$");;
-    private static final Pattern PIN_PATTERN = null;
-    private static final Pattern AMOUNT_PATTERN = null;
-    private static final Pattern ACCOUNT_ID_PATTERN = null;
-    private static final Pattern CLIENT_ID_PATTERN = null;
-
-    // Validates client name
-     
     public static boolean isValidName(String name) {
-        // TODO: Implement name validation
-        return false;
+        if (name == null || name.trim().isEmpty()) {
+            return false;
+        }
+        String trimmedName = name.trim();
+        return trimmedName.length() >= 1 && NAME_PATTERN.matcher(trimmedName).matches();
     }
-
-    // Validates PIN
-   
+    
+    // Validates PiN - Exactly 4 digits
+    
     public static boolean isValidPin(String pin) {
-        // TODO: Implement PIN validation
-        return false;
+        return pin != null && PIN_PATTERN.matcher(pin).matches();
     }
-
-    // Validates monetary amount
-     
+    
+    /**
+     * Validates monetary amount
+     * - Non-negative number
+     * - Up to 2 decimal places
+     */
     public static boolean isValidAmount(String amount) {
-        // TODO: Implement amount validation
-        return false;
+        if (amount == null || !AMOUNT_PATTERN.matcher(amount).matches()) {
+            return false;
+        }
+        try {
+            double value = Double.parseDouble(amount);
+            return value >= 0 && value <= 999999999.99;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
-
-    //Validates account ID format
+    
+    // Validates account ID format - 8+ alphanumeric characters
      
     public static boolean isValidAccountId(String accountId) {
-        // TODO: Implement account ID validation
-        return false;
+        return accountId != null && ACCOUNT_ID_PATTERN.matcher(accountId).matches();
     }
-
-    // Validates client ID format
-     
-    public static boolean isValidClientId(String clientId) {
-        // TODO: Implement client ID validation
-        return false;
-    }
-
-    // Get validation error message for name
     
-    public static String getNameErrorMessage() {
-        // TODO: Return name error message
-        return null;
+    // Validates client ID format
+  //   - Format: CLT followed by 4 digits
+  
+    public static boolean isValidClientId(String clientId) {
+        return clientId != null && CLIENT_ID_PATTERN.matcher(clientId).matches();
     }
-
+    
+    //Get validation error message for da name
+ 
+    public static String getNameErrorMessage() {
+        return "Name must contain only letters, spaces, hyphens, or apostrophes.";
+    }
+    
     // Get validation error message for amount
-     
+    
     public static String getAmountErrorMessage() {
-        // TODO: Return amount error message
-        return null;
+        return "Amount must be a non-negative number with up to 2 decimal places (max $999,999,999.99).";
     }
 }
