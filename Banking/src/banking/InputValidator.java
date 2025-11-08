@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
  */
 public class InputValidator {
 
-    // Regex patterns
-    private static final Pattern NAME_PATTERN = null;
+    // Regex patt erns
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\s'-]+$");;
     private static final Pattern PIN_PATTERN = null;
     private static final Pattern AMOUNT_PATTERN = null;
     private static final Pattern ACCOUNT_ID_PATTERN = null;
