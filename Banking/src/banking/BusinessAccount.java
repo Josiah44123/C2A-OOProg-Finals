@@ -11,8 +11,10 @@ public class BusinessAccount extends Account {
     
     @Override
     public boolean transfer(Account targetAccount, double amount) {
-        
-        return; 
+        if (amount <= 0 || amount > TRANSACTION_LIMIT || amount > this.getBalance()) {
+            return false;
+        }
+        return super.transfer(targetAccount, amount); 
     }
     
     @Override
