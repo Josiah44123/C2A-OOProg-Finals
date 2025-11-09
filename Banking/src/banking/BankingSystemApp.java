@@ -14,9 +14,9 @@ public class BankingSystemApp {
 
    
        
-        System.out.println("╔════════════════════════════════════════╗");
-        System.out.println("║   WELCOME TO ADVANCED BANKING SYSTEM   ║");
-        System.out.println("╚════════════════════════════════════════╝");
+        System.out.println("╔═════════════════════════════════════════════╗");
+        System.out.println("║   WELCOME TO DLSL ADVANCED BANKING SYSTEM   ║");
+        System.out.println("╚═════════════════════════════════════════════╝");
 
         while (true) {
             char option = displayMainMenu(scanner);
