@@ -1,39 +1,41 @@
 package banking;
-// kay yanna toh
-public class CheckingAccount extends Account{
-    private static final double INTEREST_RATE = 0.01;
+
+public class CheckingAccount extends Account {
+    private static final double INTEREST_RATE = 0.01; // 1% annual
     private static final double SERVICE_FEE = 10.0;
     private static final double OVERDRAFT_FEE = 35.0;
     private static final double OVERDRAFT_LIMIT = 100.0;
-
+    
     public CheckingAccount(String clientId, double initialDeposit) {
         super(clientId, initialDeposit);
     }
-
+    
     @Override
-    public boolean withdraw(double amount){
-        if (amount <= 0){
-            return false;   
+    public boolean withdraw(double amount) {
+        if (amount <= 0) {
+            return false;
         }
-        if (getBalance() - amount >= -OVERDRAFT_LIMIT){
-            setBalance(getBalance() - amount);
-            addTransaction("WITHDRAWAL", amount, "Withdrawal successful");
-
-            if (getBalance() < 0){
-                setBalance(getBalance() - OVERDRAFT_FEE);
-                addTransaction("OVERDRAFT_FEE", amount, "Overdraft fee applied.");
-            }
+        
+        // Allow overdraft up to limit
+        if (amount > getBalance() && amount <= getBalance() + OVERDRAFT_LIMIT) {
+            setBalance(getBalance() - amount - OVERDRAFT_FEE);
+            addTransaction("WITHDRAWAL", amount, "Withdrawal with overdraft fee");
+            addTransaction("OVERDRAFT_FEE", OVERDRAFT_FEE, "Overdraft fee charged");
             return true;
         }
+        
+        return super.withdraw(amount);
     }
-
+    
     @Override
     public void applyInterest() {
-        double interest = getBalance() * INTEREST_RATE / 12; // Monthly interest
-        setBalance(getBalance() + interest);
-        addTransaction("INTEREST", interest, "Monthly interest applied");
+        if (getBalance() > 0) {
+            double interest = getBalance() * INTEREST_RATE / 12;
+            setBalance(getBalance() + interest);
+            addTransaction("INTEREST", interest, "Monthly interest applied");
+        }
     }
-
+    
     @Override
     public void applyServiceFee() {
         setBalance(getBalance() - SERVICE_FEE);
@@ -48,5 +50,10 @@ public class CheckingAccount extends Account{
     @Override
     public double getInterestRate() {
         return INTEREST_RATE;
+    }
+    
+    @Override
+    public double getServiceFee() {
+        return SERVICE_FEE;
     }
 }
