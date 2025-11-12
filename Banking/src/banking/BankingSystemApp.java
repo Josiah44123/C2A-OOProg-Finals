@@ -450,7 +450,7 @@ public class BankingSystemApp {
     }
     
     private static void viewBankStatistics() {
-        System.out.println("\n=== BANK STATISTICS ===");
+        System.out.println("\n== BANK STATISTICS ==");
         System.out.println("Bank Name: " + bank.getBankName());
         System.out.println("Total Clients: " + bank.getAllClients().size());
         System.out.println("Total Accounts: " + bank.getAllAccounts().size());
